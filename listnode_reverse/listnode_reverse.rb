@@ -13,13 +13,27 @@ class Reversor
   # @param {ListNode} head
   # @return {ListNode}
   def reverse_list(head)
-  	current_node = head
-  	prev_node = nil
+    current_node = head
+    prev_node = nil
     #this permutation can be illustrated as 1->2->3 <=> 2->3->1 <=> 3->2->1
     while current_node 
-   		prev_node, current_node.next, current_node = current_node, prev_node, current_node.next
-   	end
-   	prev_node
+      prev_node, current_node.next, current_node = current_node, prev_node, current_node.next
+    end
+    prev_node
+  end
+
+  def reversed_to_s(head)
+    head = reverse_list(head)
+    
+    values = Array.new
+    node = head
+    while node
+      values << node.val
+      node = node.next
+    end
+
+    values.join(" ")
+
   end
 
 end
@@ -38,13 +52,7 @@ node3.next = node4
 node4.next = nil
 
 reversor = Reversor.new
+
+puts "The reversed listnode: #{reversor.reversed_to_s(head)}"
 reversed_head = reversor.reverse_list(head)
 
-values = Array.new
-node = reversed_head
-while node
-	values << node.val
-	node = node.next
-end
-
-puts "The reversed listnode: #{values.join(" ")}"
